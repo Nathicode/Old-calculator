@@ -1,0 +1,218 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+
+        }
+        body {
+            width: 100%;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+            
+        }
+        .container {
+            width: 21rem;
+            background-color: orange;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            margin: auto;
+            margin-top: 5rem;
+            height: 25rem;
+        }
+        .disptop {
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+        .sign {
+            width: 50%;
+            font-family: cursive;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nums {
+            text-align: end;
+        }
+        .nums input {
+            margin-bottom: 1rem;
+            padding: .75rem;
+            border-color: lightskyblue;
+            border: 1px solid gray;
+            border-radius: .3rem;
+            outline: none;
+            color: black;
+        }
+        .res{
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+
+            margin-top: 1rem;
+            align-items: center;
+        }
+        .res button{
+            background-color: white;
+            color: orange;
+            border: 1px solid orange;
+            border-radius: .3rem;
+        }
+        .res input {
+            border: 1px solid gray ;
+            border-radius: .2rem;
+            padding: .2rem;
+outline: none;
+        }
+        .btns {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 10px;
+            
+        }
+        .btns button{
+            width: 25%;
+            height: 2rem;
+            border: 1px solid gray;
+            background-color: white;
+            color: orange;
+            border-radius: .2rem;
+        }
+        .btsns button:last-of-type {
+            margin-right: 11rem;
+        }
+        button:hover {
+            background-color: orange;
+            color: white;
+            border-color: white;
+        }
+        .zero {
+            margin-right: 4srem;
+            width: 50%;
+        }
+        .equal {
+            margin-right: rem;
+            width: 100%;
+        }
+        #upper, #lower {
+            color: orange;
+        }
+        #resnum {
+            color: orange;
+        }
+        .sign {
+            transition-duration: .5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="disptop">
+            <div class="sign">
+<p id="sign">Sign</p>
+            </div>
+            <div class="nums">
+                <input type="number"  id="upper">
+                <input type="number"   id="lower">
+            </div>
+
+        </div>
+        <div class="res">
+            <div class="resbtn">
+                <button value="+" id="resbtn">+</button>
+                <button value="-" id="resbtn">-</button>
+                <button value="/" id="resbtn">/</button>
+                <button value="*" id="resbtn">X</button>
+            </div>
+            <div class="resnum">
+                <input type="text" id="resnum" readonly>
+            </div>
+        </div>
+        <div class="btns">
+            <button id="calc" value="1">1</button>
+            <button id="calc" value="2">2</button>
+            <button id="calc" value="3">3</button>
+            <button id="calc" value="4">4</button>
+            <button id="calc" value="5">5</button>
+            <button id="calc" value="6">6</button>
+            <button id="calc" value="7">7</button>
+            <button id="calc" value="8">8</button>
+            <button id="calc" value="9">9</button>
+            <button id="calc" value="0" class="zero">0</button>
+            <button  class="equal">=</button>
+        </div>
+    </div>
+    <script>
+let sign = document.querySelectorAll('#resbtn');
+sign.forEach(sign => {
+sign.onclick = () => {
+    document.querySelector('#sign').innerHTML = sign.value;
+}
+})
+let upper = document.querySelector('#upper')
+let lower = document.querySelector('#lower')
+
+let calc = document.querySelectorAll('#calc');
+upper.onfocus = () => {
+    calc.forEach(calc => {
+        calc.onclick = () => {
+            let nums = calc.value;
+          upper.value += nums.toLocaleString('ens-US', {
+            style: 'currency'
+          });
+          const audio = new Audio("clicksoundeffect.mp3");
+    audio.play();
+          
+        }
+    });
+
+}
+lower.onfocus = () => {
+    calc.forEach(calc => {
+        calc.onclick = () => {
+            let nums = calc.value;
+          lower.value += nums.toLocaleString('ens-US', {
+            style: 'currency'
+          });
+          const audio = new Audio("clicksoundeffect.mp3");
+    audio.play();
+          
+        }
+    });
+    
+}
+document.querySelector('.equal').onclick = () => {
+let sign = document.querySelector('#sign');
+if (sign.innerHTML == '*') {
+    document.querySelector('#resnum').value = Number(upper.value) * Number(lower.value);
+}
+if (sign.innerHTML == '/') {
+    document.querySelector('#resnum').value = Number(upper.value) / Number(lower.value);
+
+}
+if (sign.innerHTML == '+') {
+    document.querySelector('#resnum').value = Number(upper.value) + Number(lower.value);
+}
+if (sign.innerHTML == '-') {
+    document.querySelector('#resnum').value = Number(upper.value) - Number(lower.value);
+}
+if(sign.innerHTML == 'Sign' ){
+    sign.style.color = 'red';
+   sign.innerHTML = 'Sign required'
+   sign.style.color = 'white';
+}
+}
+
+    </script>
+</body>
+</html>
